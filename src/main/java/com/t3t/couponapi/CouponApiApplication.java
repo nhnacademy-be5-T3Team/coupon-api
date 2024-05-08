@@ -2,12 +2,12 @@ package com.t3t.couponapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@ConfigurationPropertiesScan
+@EnableDiscoveryClient
 @SpringBootApplication
+@ConfigurationPropertiesScan
 public class CouponApiApplication {
 
 	public static void main(String[] args) {

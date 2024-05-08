@@ -21,14 +21,18 @@ public class Coupon {
     @Column(name = "coupon_expire_date")
     private LocalDate couponExpireDate;
 
+    @Column(name = "coupon_used")
+    private int isUsed;
+
     @JoinColumn(name = "coupon_policy_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private CouponPolicies policies;
+    private CouponPolicy policies;
 
-    public Coupon(String couponId, String couponType, LocalDate couponExpireDate, CouponPolicies policies){
+    public Coupon(String couponId, String couponType, LocalDate couponExpireDate, int isUsed, CouponPolicy policies) {
         this.couponId = couponId;
         this.couponType = couponType;
         this.couponExpireDate = couponExpireDate;
+        this.isUsed = isUsed;
         this.policies = policies;
     }
 }

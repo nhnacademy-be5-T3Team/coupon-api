@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity@Table(name = "coupon_policies")
-public class CouponPolicies {
+public class CouponPolicy {
     @Id
     @Column(name = "coupon_policy_id")
     private int couponPolicyId;
