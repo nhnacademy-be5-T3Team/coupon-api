@@ -22,13 +22,13 @@ public class Coupon {
     private LocalDate couponExpireDate;
 
     @Column(name = "coupon_used")
-    private int isUsed;
+    private boolean isUsed;
 
     @JoinColumn(name = "coupon_policy_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private CouponPolicy policies;
 
-    public Coupon(String couponId, String couponType, LocalDate couponExpireDate, int isUsed, CouponPolicy policies) {
+    public Coupon(String couponId, String couponType, LocalDate couponExpireDate, boolean isUsed, CouponPolicy policies) {
         this.couponId = couponId;
         this.couponType = couponType;
         this.couponExpireDate = couponExpireDate;
