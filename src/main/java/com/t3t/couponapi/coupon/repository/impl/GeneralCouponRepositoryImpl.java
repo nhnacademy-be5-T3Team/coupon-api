@@ -12,7 +12,7 @@ import static com.t3t.couponapi.coupon.model.entity.QGeneralCoupon.generalCoupon
 
 @RequiredArgsConstructor
 public class GeneralCouponRepositoryImpl implements GeneralCouponRepositoryCustom {
-    private JPAQueryFactory jpaQueryFactory;
+    private final JPAQueryFactory jpaQueryFactory;
     @Override
     public Optional<GeneralCoupon> getGeneralCoupon() {
         return Optional.ofNullable(jpaQueryFactory.select(Projections.fields(GeneralCoupon.class,

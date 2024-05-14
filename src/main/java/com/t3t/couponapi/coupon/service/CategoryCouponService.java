@@ -6,6 +6,7 @@ import com.t3t.couponapi.coupon.exception.CouponNotSavedExceptions;
 import com.t3t.couponapi.coupon.exception.CouponPolicyNotExistException;
 import com.t3t.couponapi.coupon.model.entity.CategoryCoupon;
 import com.t3t.couponapi.coupon.model.entity.CouponPolicy;
+import com.t3t.couponapi.coupon.model.request.CouponIdRequest;
 import com.t3t.couponapi.coupon.model.request.CouponRequest;
 import com.t3t.couponapi.coupon.model.response.CategoryIdResponse;
 import com.t3t.couponapi.coupon.model.response.CouponResponse;
@@ -36,10 +37,9 @@ public class CategoryCouponService {
 
     public String saveCategoryCoupon(CouponRequest request, Integer id){
         CategoryIdResponse categoryId = findCategoryId(id);
-        String uuid = UUID.randomUUID().toString();
         CouponPolicy couponPolicy = couponPolicyRepository.findById(request.getCouponPolicyId()).orElseThrow(CouponPolicyNotExistException::new);
         CategoryCoupon categoryCoupon = CategoryCoupon.builder()
-                .couponId(uuid)
+                .couponId(UUID.randomUUID().toString().replace("-",""))
                 .policies(couponPolicy)
                 .couponType(request.getCouponType())
                 .couponExpireDate(request.getCouponExpireDate())
@@ -54,8 +54,8 @@ public class CategoryCouponService {
         return "CategoryCouponSaved";
     }
 
-    public String deleteCategoryCouponByAdmin(String uuid){
-        CategoryCoupon categoryCoupon = categoryCouponRepository.findById(uuid).orElseThrow(() -> new CouponNotExistExceptions("CategoryCoupon Not Exists"));
+    public String deleteCategoryCouponByAdmin(CouponIdRequest request){
+        CategoryCoupon categoryCoupon = categoryCouponRepository.findById(request.getCouponId()).orElseThrow(() -> new CouponNotExistExceptions("CategoryCoupon Not Exists"));
         categoryCoupon.deleteCoupon(true);
         return "Category Coupon Deleted";
     }

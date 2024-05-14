@@ -1,6 +1,6 @@
 package com.t3t.couponapi.coupon.controller;
 
-import com.t3t.couponapi.coupon.model.request.BookCouponRequest;
+import com.t3t.couponapi.coupon.model.request.CouponIdRequest;
 import com.t3t.couponapi.coupon.model.request.CouponRequest;
 import com.t3t.couponapi.coupon.model.response.BaseResponse;
 import com.t3t.couponapi.coupon.model.response.CouponResponse;
@@ -23,7 +23,7 @@ public class BookCouponController {
     }
 
     @PutMapping("/coupon/book")
-    public ResponseEntity<BaseResponse<Void>> deleteBookCoupon(@RequestBody BookCouponRequest request){
+    public ResponseEntity<BaseResponse<Void>> deleteBookCoupon(@RequestBody CouponIdRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(new BaseResponse<Void>().message(bookCouponService.deleteBookCoupon(request)));
     }
 

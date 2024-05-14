@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 
 @Getter@SuperBuilder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity@Table(name = "book_category_coupons")
 public class CategoryCoupon extends Coupon{

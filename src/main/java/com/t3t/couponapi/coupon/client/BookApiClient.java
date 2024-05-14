@@ -12,9 +12,9 @@ import java.util.List;
 
 @FeignClient(name = "bookApiClient", url = "${t3t.feignClient.url}")
 public interface BookApiClient {
-    @GetMapping(value = "/t3t/bookstore/book/coupons")
+    @GetMapping(value = "/t3t/bookstore/books/coupons")
     ResponseEntity<BaseResponse<List<BookIdResponse>>> getBooksId();
 
-    @GetMapping(value = "/t3t/bookstore/book/{bookId}/coupons")
+    @GetMapping(value = "/t3t/bookstore/books/{bookId}/coupons")
     ResponseEntity<BaseResponse<BookIdResponse>> getBookId(@PathVariable("bookId") Long bookId);
 }

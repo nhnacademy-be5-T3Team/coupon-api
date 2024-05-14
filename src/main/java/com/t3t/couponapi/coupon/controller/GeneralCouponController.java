@@ -1,5 +1,6 @@
 package com.t3t.couponapi.coupon.controller;
 
+import com.t3t.couponapi.coupon.model.request.CouponIdRequest;
 import com.t3t.couponapi.coupon.model.request.CouponRequest;
 import com.t3t.couponapi.coupon.model.response.BaseResponse;
 import com.t3t.couponapi.coupon.model.response.CouponResponse;
@@ -20,9 +21,9 @@ public class GeneralCouponController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new BaseResponse<Void>().message("General Coupon Created"));
     }
 
-    @PutMapping("/coupons/general/{couponId}")
-    public ResponseEntity<BaseResponse<Void>> deleteGeneralCoupon(@PathVariable("couponId") String couponId){
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<Void>().message(generalCouponService.deleteGeneralCouponByAdmin(couponId)));
+    @PutMapping("/coupons/general")
+    public ResponseEntity<BaseResponse<Void>> deleteGeneralCoupon(@RequestBody CouponIdRequest request){
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<Void>().message(generalCouponService.deleteGeneralCouponByAdmin(request)));
     }
 
     @GetMapping("/coupons/general")

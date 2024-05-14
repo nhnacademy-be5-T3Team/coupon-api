@@ -6,7 +6,7 @@ import com.t3t.couponapi.coupon.exception.CouponNotSavedExceptions;
 import com.t3t.couponapi.coupon.exception.CouponPolicyNotExistException;
 import com.t3t.couponapi.coupon.model.entity.BookCoupon;
 import com.t3t.couponapi.coupon.model.entity.CouponPolicy;
-import com.t3t.couponapi.coupon.model.request.BookCouponRequest;
+import com.t3t.couponapi.coupon.model.request.CouponIdRequest;
 import com.t3t.couponapi.coupon.model.request.CouponRequest;
 import com.t3t.couponapi.coupon.model.response.BookIdResponse;
 import com.t3t.couponapi.coupon.model.response.CouponResponse;
@@ -31,20 +31,17 @@ public class BookCouponService {
         return bookAdapter.findBooksId();
     }
 
-    public BookIdResponse getBookId(Long id){
-        return bookAdapter.getBookId(id);
-    }
 
     public String createBookCoupon(CouponRequest request, Long id){
         CouponPolicy couponPolicy = couponPolicyRepository.findById(request.getCouponPolicyId()).orElseThrow(() -> new CouponPolicyNotExistException("Coupon Policy Not Exist"));
 
         BookCoupon bookCoupon = BookCoupon.builder()
-                .couponId(UUID.randomUUID().toString())
+                .couponId(UUID.randomUUID().toString().replace("-",""))
                 .couponType(request.getCouponType())
                 .couponExpireDate(request.getCouponExpireDate())
                 .isUsed(false)
                 .policies(couponPolicy)
-                .bookId(getBookId(id).getBookId())
+                .bookId(bookAdapter.getBook(id).getBookId())
                 .build();
 
         BookCoupon newBookCoupon = bookCouponRepository.save(bookCoupon);
@@ -54,7 +51,7 @@ public class BookCouponService {
         return "BookCoupon Created";
     }
 
-    public String deleteBookCoupon(BookCouponRequest request){
+    public String deleteBookCoupon(CouponIdRequest request){
         BookCoupon bookCoupon = bookCouponRepository.findById(request.getCouponId()).orElseThrow(() -> new CouponNotExistExceptions("Book Coupon Not Exists"));
         bookCoupon.deleteCoupon(true);
         return "Book Coupon deleted";

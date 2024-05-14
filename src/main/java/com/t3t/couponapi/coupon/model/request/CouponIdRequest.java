@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class BookCouponRequest {
+public class CouponIdRequest {
     private String couponId;
 
 }

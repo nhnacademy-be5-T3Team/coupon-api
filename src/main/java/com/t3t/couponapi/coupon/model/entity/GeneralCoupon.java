@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Getter@SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity@Table(name = "general_coupons")
 public class GeneralCoupon extends Coupon{
 }

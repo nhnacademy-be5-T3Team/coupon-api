@@ -26,7 +26,7 @@ public class BookAdapter {
         }
     }
 
-    public BookIdResponse getBookId(Long id){
+    public BookIdResponse getBook(Long id){
         try{
             return Optional.ofNullable(bookApiClient.getBookId(id).getBody())
                     .map(BaseResponse::getData)

@@ -5,6 +5,7 @@ import com.t3t.couponapi.coupon.exception.CouponNotSavedExceptions;
 import com.t3t.couponapi.coupon.exception.CouponPolicyNotExistException;
 import com.t3t.couponapi.coupon.model.entity.CouponPolicy;
 import com.t3t.couponapi.coupon.model.entity.GeneralCoupon;
+import com.t3t.couponapi.coupon.model.request.CouponIdRequest;
 import com.t3t.couponapi.coupon.model.request.CouponRequest;
 import com.t3t.couponapi.coupon.model.response.CouponResponse;
 import com.t3t.couponapi.coupon.repository.CouponPolicyRepository;
@@ -25,7 +26,7 @@ public class GeneralCouponService {
     public void createGeneralCoupon(CouponRequest request){
         CouponPolicy couponPolicy = couponPolicyRepository.findById(request.getCouponPolicyId()).orElseThrow(()-> new CouponPolicyNotExistException("Coupon Policy Not Exists")        );
         GeneralCoupon generalCoupon = GeneralCoupon.builder()
-                .couponId(UUID.randomUUID().toString())
+                .couponId(UUID.randomUUID().toString().replace("-",""))
                 .policies(couponPolicy)
                 .couponType(request.getCouponType())
                 .couponExpireDate(request.getCouponExpireDate())
@@ -39,8 +40,8 @@ public class GeneralCouponService {
         }
     }
 
-    public String deleteGeneralCouponByAdmin(String couponId){
-        GeneralCoupon coupon = generalCouponRepository.findById(couponId).orElseThrow(() -> new CouponNotExistExceptions("Coupon Not Exists"));
+    public String deleteGeneralCouponByAdmin(CouponIdRequest request){
+        GeneralCoupon coupon = generalCouponRepository.findById(request.getCouponId()).orElseThrow(() -> new CouponNotExistExceptions("Coupon Not Exists"));
         coupon.deleteCoupon(true);
         return "Delete Succeed";
     }
