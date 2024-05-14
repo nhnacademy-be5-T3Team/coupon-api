@@ -25,4 +25,14 @@ public class BookAdapter {
             throw new BookApiClientException();
         }
     }
+
+    public BookIdResponse getBookId(Long id){
+        try{
+            return Optional.ofNullable(bookApiClient.getBookId(id).getBody())
+                    .map(BaseResponse::getData)
+                    .orElseThrow(BookApiClientException::new);
+        }catch(FeignException e){
+            throw new BookApiClientException();
+        }
+    }
 }

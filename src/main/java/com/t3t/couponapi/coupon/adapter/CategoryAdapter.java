@@ -25,4 +25,14 @@ public class CategoryAdapter {
             throw new BookCategoryApiClientException();
         }
     }
+
+    public CategoryIdResponse getCategory(Integer id){
+        try{
+            return Optional.ofNullable(categoryApiClient.getCategoryId(id).getBody())
+                    .map(BaseResponse::getData)
+                    .orElseThrow(BookCategoryApiClientException::new);
+        }catch (FeignException e){
+            throw new BookCategoryApiClientException();
+        }
+    }
 }

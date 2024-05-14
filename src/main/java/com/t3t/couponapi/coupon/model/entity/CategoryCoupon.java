@@ -11,11 +11,11 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity@Table(name = "book_category_coupons")
-public class BookCategoryCoupon extends Coupon{
+public class CategoryCoupon extends Coupon{
     @Column(name = "category_id")
     private int categoryId;
 
-    public BookCategoryCoupon(int categoryId){
+    public CategoryCoupon(int categoryId){
         this.categoryId = categoryId;
     }
 }

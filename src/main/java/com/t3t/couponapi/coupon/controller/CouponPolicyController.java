@@ -20,8 +20,7 @@ public class CouponPolicyController {
 
     @GetMapping("/coupon/policy")
     public ResponseEntity<BaseResponse<List<PolicyResponse>>> getAllPolicies(){
-        List<PolicyResponse> response = couponPolicyService.getAllPolicy();
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<List<PolicyResponse>>().data(response));
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<List<PolicyResponse>>().data(couponPolicyService.getAllPolicy()));
     }
 
     @GetMapping("/coupon/policy/{policyId}")
@@ -41,15 +40,15 @@ public class CouponPolicyController {
 
     @PostMapping("/coupon/policy")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponse<Void> savePolicy(@RequestBody @Valid CouponPolicyRequest couponPolicyRequest){
+    public ResponseEntity<BaseResponse<Void>> savePolicy(@RequestBody @Valid CouponPolicyRequest couponPolicyRequest){
         couponPolicyService.savePolicy(couponPolicyRequest);
-        return new BaseResponse<Void>().message("쿠폰 정책이 등록되었습니다.");
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<Void>().message("Coupon has saved"));
     }
 
     @PutMapping("/coupon/policy/{policyId}")
-    public BaseResponse<Void> changeCouponPolicy(@PathVariable("policyId") int policyId,
+    public ResponseEntity<BaseResponse<Void>> changeCouponPolicy(@PathVariable("policyId") int policyId,
                                                  @RequestBody @Valid CouponPolicyRequest couponPolicyRequest){
         couponPolicyService.updatePolicy(couponPolicyRequest, policyId);
-        return new BaseResponse<Void>().message("쿠폰 정책이 수정되었습니다");
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<Void>().message("쿠폰 정책이 수정되었습니다"));
     }
 }

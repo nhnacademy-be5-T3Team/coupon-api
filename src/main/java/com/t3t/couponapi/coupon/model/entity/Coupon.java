@@ -35,4 +35,8 @@ public class Coupon {
         this.isUsed = isUsed;
         this.policies = policies;
     }
+
+    public void deleteCoupon(boolean isUsed){
+        this.isUsed = isUsed;
+    }
 }

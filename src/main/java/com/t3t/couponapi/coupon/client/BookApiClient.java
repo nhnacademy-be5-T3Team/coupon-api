@@ -6,6 +6,7 @@ import com.t3t.couponapi.coupon.model.response.BookIdResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -13,4 +14,7 @@ import java.util.List;
 public interface BookApiClient {
     @GetMapping(value = "/t3t/bookstore/book/coupons")
     ResponseEntity<BaseResponse<List<BookIdResponse>>> getBooksId();
+
+    @GetMapping(value = "/t3t/bookstore/book/{bookId}/coupons")
+    ResponseEntity<BaseResponse<BookIdResponse>> getBookId(@PathVariable("bookId") Long bookId);
 }
