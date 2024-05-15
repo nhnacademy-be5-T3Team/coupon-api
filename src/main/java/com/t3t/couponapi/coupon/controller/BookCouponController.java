@@ -15,19 +15,19 @@ import org.springframework.web.bind.annotation.*;
 public class BookCouponController {
     private final BookCouponService bookCouponService;
 
-    @PostMapping("/coupon/book/{bookId}")
+    @PostMapping("/coupons/book/{bookId}")
     public ResponseEntity<BaseResponse<Void>> createBookCoupon(@PathVariable("bookId") Long bookId,
                                                                @RequestBody CouponRequest couponRequest){
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new BaseResponse<Void>().message(bookCouponService.createBookCoupon(couponRequest, bookId)));
     }
 
-    @PutMapping("/coupon/book")
+    @PutMapping("/coupons/book")
     public ResponseEntity<BaseResponse<Void>> deleteBookCoupon(@RequestBody CouponIdRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(new BaseResponse<Void>().message(bookCouponService.deleteBookCoupon(request)));
     }
 
-    @GetMapping("/coupon/book")
+    @GetMapping("/coupons/book")
     public ResponseEntity<BaseResponse<CouponResponse>> getBookCoupon(){
         return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<CouponResponse>().data(bookCouponService.getBookCoupon()));
     }
