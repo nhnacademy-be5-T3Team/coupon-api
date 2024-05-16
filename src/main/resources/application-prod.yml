@@ -1,0 +1,9 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: ${eurekaServiceUrlDefaultZone}
+
+
+t3t:
+  feignClient:
+    url: ${feignClientUrl}
